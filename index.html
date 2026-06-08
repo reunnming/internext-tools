@@ -262,33 +262,33 @@ input::placeholder { color: var(--text3); }
     </div>
   </div>
 
-  <!-- PREVIEW: Part 1 | Full Name -->
+  <!-- PREVIEW: Part 1 | Part 2 (independent) -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px;">
 
-    <div class="preview-wrap" style="margin-bottom:0">
+    <div class="preview-wrap" style="margin-bottom:0;border-color:var(--purple)">
       <div class="preview-label" style="color:var(--purple)">Part 1 — Creative ID</div>
       <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Content team: name file &amp; upload to Drive</div>
       <div class="full-name-box incomplete" id="p1Name" style="min-height:52px;font-size:13px">Fill Part 1 fields above.</div>
       <div class="copy-row" style="margin-top:10px">
         <button class="btn-copy" id="copyP1Btn" onclick="copyPart('p1Name','copyP1Feedback')" disabled style="background:var(--purple)">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copy Creative ID
+          Copy Part 1
         </button>
+        <button class="btn-reset" onclick="resetAd()">Reset All</button>
         <span class="copy-feedback" id="copyP1Feedback">✓ Copied!</span>
       </div>
     </div>
 
     <div class="preview-wrap" style="margin-bottom:0">
-      <div class="preview-label">Part 1 + 2 — Full Ad Name</div>
+      <div class="preview-label">Part 2 — Publishing Settings</div>
       <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Publishing team: paste into Meta Ads Manager</div>
-      <div class="full-name-box incomplete" id="fullName" style="min-height:52px;font-size:13px">Fill both parts above.</div>
+      <div class="full-name-box incomplete" id="p2Name" style="min-height:52px;font-size:13px">Fill Part 2 fields above.</div>
       <div class="copy-row" style="margin-top:10px">
-        <button class="btn-copy" id="copyBtn" onclick="copyPart('fullName','copyFeedback')" disabled>
+        <button class="btn-copy" id="copyP2Btn" onclick="copyPart('p2Name','copyP2Feedback')" disabled>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copy Full Name
+          Copy Part 2
         </button>
-        <button class="btn-reset" onclick="resetAd()">Reset</button>
-        <span class="copy-feedback" id="copyFeedback">✓ Copied!</span>
+        <span class="copy-feedback" id="copyP2Feedback">✓ Copied!</span>
       </div>
     </div>
 
@@ -685,25 +685,19 @@ function generateAd() {
     p1Btn.disabled = true;
   }
 
-  // Full name preview
-  const fullEl = document.getElementById('fullName');
-  const copyBtn = document.getElementById('copyBtn');
-  if (p1Complete && p2Complete) {
-    const full = p1 + '__' + p2;
-    fullEl.textContent = full;
-    fullEl.className = 'full-name-box complete';
-    fullEl._value = full;
-    copyBtn.disabled = false;
-  } else if (p1Complete) {
-    fullEl.textContent = p1 + ' __ [Fill Part 2]';
-    fullEl.className = 'full-name-box';
-    fullEl._value = null;
-    copyBtn.disabled = true;
+  // Part 2 preview (independent)
+  const p2El = document.getElementById('p2Name');
+  const p2Btn = document.getElementById('copyP2Btn');
+  if (p2Complete) {
+    p2El.textContent = p2;
+    p2El.className = 'full-name-box complete';
+    p2El._value = p2;
+    p2Btn.disabled = false;
   } else {
-    fullEl.textContent = 'Fill both parts above.';
-    fullEl.className = 'full-name-box incomplete';
-    fullEl._value = null;
-    copyBtn.disabled = true;
+    p2El.textContent = p2 || 'Fill Part 2 fields above.';
+    p2El.className = 'full-name-box ' + (p2 ? '' : 'incomplete');
+    p2El._value = null;
+    p2Btn.disabled = true;
   }
 }
 
@@ -799,12 +793,11 @@ function resetAd() {
     const el = document.getElementById(id); if (el) { el.value = ''; el.classList.add('empty'); }
   });
   ['f-hook','f-age','f-mmyy'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  [['p1Name','Fill Part 1 fields above.'],['fullName','Fill both parts above.']].forEach(([id, txt]) => {
-    const el = document.getElementById(id); el.textContent = txt; el.className = 'full-name-box incomplete'; el._value = null;
+  [['p1Name','Fill Part 1 fields above.'],['p2Name','Fill Part 2 fields above.']].forEach(([id, txt]) => {
+    const el = document.getElementById(id); if (el) { el.textContent = txt; el.className = 'full-name-box incomplete'; el._value = null; }
   });
   document.getElementById('copyP1Btn').disabled = true;
-  document.getElementById('copyBtn').disabled = true;
-  document.querySelectorAll('#p1Name, #fullName').forEach(() => {});
+  document.getElementById('copyP2Btn').disabled = true;
   // Reset indicators for ad section
   ['ind-brand','ind-prod','ind-angle','ind-format','ind-hook','ind-vn','ind-mmyy','ind-obj','ind-funn','ind-aud','ind-age','ind-dest'].forEach(id => {
     const el = document.getElementById(id); if (el) el.className = 'indicator ind-empty';
