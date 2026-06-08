@@ -11,6 +11,8 @@
   --blue: #2563EB; --blue-bg: #EFF6FF; --blue-border: #BFDBFE;
   --green: #059669; --green-bg: #D1FAE5;
   --purple: #7C3AED; --purple-bg: #F5F3FF; --purple-border: #C4B5FD;
+  --teal: #0D9488; --teal-bg: #F0FDFA; --teal-border: #99F6E4;
+  --orange: #EA580C; --orange-bg: #FFF7ED; --orange-border: #FED7AA;
   --amber: #D97706; --amber-bg: #FEF3C7;
   --red: #DC2626; --red-bg: #FEE2E2;
   --radius: 10px;
@@ -24,29 +26,42 @@ header { background: var(--surface); border-bottom: 1px solid var(--border); pad
 .logo-sep { width: 1px; height: 18px; background: var(--border); }
 .logo-sub { font-size: 12px; color: var(--text2); font-weight: 500; }
 
-main { max-width: 860px; margin: 32px auto; padding: 0 20px 60px; }
+main { max-width: 900px; margin: 32px auto; padding: 0 20px 60px; }
 
-h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
-.page-sub { font-size: 13px; color: var(--text2); margin-bottom: 28px; }
+/* Section headers */
+.section-header { display: flex; align-items: center; gap: 12px; margin: 32px 0 14px; }
+.section-title { font-size: 18px; font-weight: 800; }
+.section-sub { font-size: 12px; color: var(--text2); }
+.section-badge { font-size: 10px; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: .05em; }
+.badge-ad   { background: var(--purple-bg); color: var(--purple); border: 1.5px solid var(--purple-border); }
+.badge-camp { background: var(--teal-bg);   color: var(--teal);   border: 1.5px solid var(--teal-border); }
+.badge-adset{ background: var(--orange-bg); color: var(--orange); border: 1.5px solid var(--orange-border); }
 
 /* Part sections */
-.part { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 16px; }
+.part { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 14px; }
 .part-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
 .part-tag { font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: .04em; }
 .tag-content { background: var(--purple-bg); color: var(--purple); border: 1.5px solid var(--purple-border); }
 .tag-publish { background: var(--blue-bg); color: var(--blue); border: 1.5px solid var(--blue-border); }
+.tag-camp   { background: var(--teal-bg); color: var(--teal); border: 1.5px solid var(--teal-border); }
+.tag-adset  { background: var(--orange-bg); color: var(--orange); border: 1.5px solid var(--orange-border); }
 .part-title { font-size: 14px; font-weight: 700; }
 .part-who { font-size: 11px; color: var(--text3); margin-left: auto; }
+
+/* Format hint bar */
+.format-hint { font-family: 'SF Mono','Fira Code','Consolas',monospace; font-size: 11px; color: var(--text3); background: var(--bg); border: 1px solid var(--border2); border-radius: 6px; padding: 6px 12px; margin-bottom: 16px; }
+.format-hint b { color: var(--text); }
 
 /* Fields grid */
 .fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .fields-2 { grid-template-columns: repeat(2, 1fr); }
+.fields-4 { grid-template-columns: repeat(4, 1fr); }
 
 .field { display: flex; flex-direction: column; gap: 5px; }
 .field label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--text2); }
 .field-hint { font-size: 10px; color: var(--text3); margin-top: 1px; }
 
-select, input[type="text"] {
+select, input[type="text"], input[type="date"] {
   border: 1.5px solid var(--border);
   border-radius: 7px;
   padding: 9px 11px;
@@ -59,42 +74,42 @@ select, input[type="text"] {
   transition: border-color .15s;
 }
 select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 30px; cursor: pointer; }
-select:focus, input[type="text"]:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
+select:focus, input[type="text"]:focus, input[type="date"]:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.1); }
 select.empty { color: var(--text3); }
 input::placeholder { color: var(--text3); }
 
 /* Preview */
 .preview-wrap { background: var(--surface); border: 2px solid var(--blue); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 16px; }
+.preview-wrap.camp  { border-color: var(--teal); }
+.preview-wrap.adset { border-color: var(--orange); }
 .preview-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--blue); margin-bottom: 10px; }
-.preview-parts { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-.preview-part { display: flex; align-items: center; gap: 8px; }
-.preview-part-tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; min-width: 80px; text-align: center; }
-.preview-part-name { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: .03em; }
-.separator { font-size: 12px; color: var(--text3); font-weight: 700; }
+.preview-wrap.camp  .preview-label { color: var(--teal); }
+.preview-wrap.adset .preview-label { color: var(--orange); }
 
-.full-name-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 7px; padding: 12px 14px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 14px; font-weight: 700; color: var(--text); word-break: break-all; line-height: 1.6; margin-bottom: 12px; min-height: 46px; }
+.full-name-box { background: var(--bg); border: 1.5px solid var(--border); border-radius: 7px; padding: 12px 14px; font-family: 'SF Mono','Fira Code','Consolas',monospace; font-size: 14px; font-weight: 700; color: var(--text); word-break: break-all; line-height: 1.6; margin-bottom: 12px; min-height: 46px; }
 .full-name-box.complete { border-color: var(--green); background: #F0FDF4; }
 .full-name-box.incomplete { color: var(--text3); font-style: italic; font-weight: 400; font-family: inherit; font-size: 13px; }
 
-.copy-row { display: flex; gap: 10px; align-items: center; }
+.copy-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .btn-copy { background: var(--blue); color: #fff; border: none; border-radius: 7px; padding: 10px 22px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background .15s; }
 .btn-copy:hover { background: #1D4ED8; }
-.btn-copy:disabled { background: var(--border); color: var(--text3); cursor: not-allowed; }
+.btn-copy.camp-btn  { background: var(--teal); }
+.btn-copy.camp-btn:hover  { background: #0F766E; }
+.btn-copy.adset-btn { background: var(--orange); }
+.btn-copy.adset-btn:hover { background: #C2410C; }
+.btn-copy:disabled { background: var(--border) !important; color: var(--text3); cursor: not-allowed; }
 .btn-reset { background: transparent; border: 1.5px solid var(--border); color: var(--text2); border-radius: 7px; padding: 10px 18px; font-size: 13px; font-weight: 600; cursor: pointer; }
 .btn-reset:hover { background: var(--bg); }
 .copy-feedback { font-size: 12px; color: var(--green); font-weight: 600; opacity: 0; transition: opacity .3s; }
 .copy-feedback.show { opacity: 1; }
 
-/* Age chips */
-.age-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
-.age-chip { padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--surface); font-size: 12px; font-weight: 600; color: var(--text2); cursor: pointer; transition: all .15s; user-select: none; }
-.age-chip:hover { border-color: var(--blue); color: var(--blue); }
-.age-chip.selected { background: var(--blue); border-color: var(--blue); color: #fff; }
-
 /* Validation indicators */
 .field .indicator { width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-left: 4px; vertical-align: middle; }
 .ind-ok { background: var(--green); }
 .ind-empty { background: var(--border); }
+
+/* Divider */
+.divider { height: 1px; background: var(--border); margin: 28px 0; }
 
 /* Legend */
 .legend { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 18px 22px; }
@@ -104,8 +119,6 @@ input::placeholder { color: var(--text3); }
 .legend-group-title { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
 .legend-item { font-size: 11px; color: var(--text2); padding: 2px 0; display: flex; gap: 6px; }
 .legend-code { font-family: monospace; font-weight: 700; color: var(--text); min-width: 70px; }
-
-.divider { height: 1px; background: var(--border); margin: 20px 0; }
 </style>
 </head>
 <body>
@@ -117,12 +130,20 @@ input::placeholder { color: var(--text3); }
 </header>
 
 <main>
-  <h2>Generate Ad Name</h2>
-  <p class="page-sub">Two parts: Content team fills Part 1, Publishing team fills Part 2. Both parts combine into the final ad name.</p>
-  <div style="font-size:11px;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+
+  <div style="font-size:11px;margin-bottom:4px;display:flex;align-items:center;gap:8px;margin-top:4px;">
     <span id="loadStatus" style="color:var(--text3)">Loading labels...</span>
     <span style="color:var(--border)">·</span>
-    <a href="https://docs.google.com/spreadsheets/d/1ym4CSJU3Z24mN_4QOXTnqOFK6hcRK78iOAfeAStnBvk/edit#gid=" target="_blank" style="color:var(--blue);font-size:11px;font-weight:600;text-decoration:none;">Edit labels in Google Sheet ↗</a>
+    <a href="https://docs.google.com/spreadsheets/d/1ym4CSJU3Z24mN_4QOXTnqOFK6hcRK78iOAfeAStnBvk/edit#gid=1881158743" target="_blank" style="color:var(--blue);font-size:11px;font-weight:600;text-decoration:none;">Edit labels in Google Sheet ↗</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!--  SECTION 1 — AD LEVEL                                          -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <div class="section-header" style="margin-top:20px;">
+    <span class="section-badge badge-ad">Ad Level</span>
+    <span class="section-title">Generate Ad Name</span>
+    <span class="section-sub">Content team fills Part 1 · Publishing team fills Part 2</span>
   </div>
 
   <!-- PART 1: CONTENT -->
@@ -132,7 +153,8 @@ input::placeholder { color: var(--text3); }
       <span class="part-title">Creative ID</span>
       <span class="part-who">→ Content / Creative Team</span>
     </div>
-    <div class="fields" id="part1Fields">
+    <div class="format-hint">Brand-Product-Angle-<b>Format</b>-Hook-Version-ddmmyy</div>
+    <div class="fields">
 
       <div class="field">
         <label>Brand <span class="indicator ind-empty" id="ind-brand"></span></label>
@@ -147,9 +169,6 @@ input::placeholder { color: var(--text3); }
         <label>Product <span class="indicator ind-empty" id="ind-prod"></span></label>
         <select id="f-prod" class="empty" onchange="update(this,'ind-prod')">
           <option value="">— Select —</option>
-          <option value="QXD">QXD — 强心丹 (Heart)</option>
-          <option value="PGS">PGS — 平干素 (Liver)</option>
-          <option value="LASH">LASH — Ruvine Lash</option>
         </select>
       </div>
 
@@ -157,14 +176,6 @@ input::placeholder { color: var(--text3); }
         <label>Angle <span class="indicator ind-empty" id="ind-angle"></span></label>
         <select id="f-angle" class="empty" onchange="update(this,'ind-angle')">
           <option value="">— Select —</option>
-          <option value="Testi">Testi — Testimonial / 证言</option>
-          <option value="Pain">Pain — Pain Point / 痛点</option>
-          <option value="Fear">Fear — Fear / Consequence / 恐惧</option>
-          <option value="Relief">Relief — Relief / Benefit / 爽点</option>
-          <option value="Results">Results — Efficacy / 功效</option>
-          <option value="Ingredient">Ingredient — 成分</option>
-          <option value="Edu">Edu — Education / 科普</option>
-          <option value="Compare">Compare — Comparison / 对比</option>
         </select>
       </div>
 
@@ -172,16 +183,13 @@ input::placeholder { color: var(--text3); }
         <label>Format <span class="indicator ind-empty" id="ind-format"></span></label>
         <select id="f-format" class="empty" onchange="update(this,'ind-format')">
           <option value="">— Select —</option>
-          <option value="VID">VID — Video</option>
-          <option value="IMG">IMG — Image</option>
-          <option value="CAR">CAR — Carousel</option>
         </select>
       </div>
 
       <div class="field">
         <label>Hook <span class="indicator ind-empty" id="ind-hook"></span></label>
         <input type="text" id="f-hook" placeholder="e.g. HeartBlock, NoMeds" maxlength="20" oninput="updateText('ind-hook')">
-        <span class="field-hint">2–3 words, no spaces (use CamelCase)</span>
+        <span class="field-hint">CamelCase, no dashes or spaces</span>
       </div>
 
       <div class="field">
@@ -212,16 +220,13 @@ input::placeholder { color: var(--text3); }
       <span class="part-title">Publishing Settings</span>
       <span class="part-who">→ Ads Publishing Team</span>
     </div>
+    <div class="format-hint">Objective-Funnel-Audience-Age-<b>Destination</b></div>
     <div class="fields">
 
       <div class="field">
         <label>Objective <span class="indicator ind-empty" id="ind-obj"></span></label>
         <select id="f-obj" class="empty" onchange="update(this,'ind-obj')">
           <option value="">— Select —</option>
-          <option value="MSG">MSG — Messages</option>
-          <option value="CONV">CONV — Conversions</option>
-          <option value="AWARE">AWARE — Awareness</option>
-          <option value="VIEW">VIEW — Video Views</option>
         </select>
       </div>
 
@@ -229,9 +234,6 @@ input::placeholder { color: var(--text3); }
         <label>Funnel <span class="indicator ind-empty" id="ind-funn"></span></label>
         <select id="f-funn" class="empty" onchange="update(this,'ind-funn')">
           <option value="">— Select —</option>
-          <option value="TOF">TOF — Top of Funnel (Cold)</option>
-          <option value="MOF">MOF — Middle of Funnel (Warm)</option>
-          <option value="BOF">BOF — Bottom of Funnel (Retarget)</option>
         </select>
       </div>
 
@@ -239,17 +241,13 @@ input::placeholder { color: var(--text3); }
         <label>Audience <span class="indicator ind-empty" id="ind-aud"></span></label>
         <select id="f-aud" class="empty" onchange="update(this,'ind-aud')">
           <option value="">— Select —</option>
-          <option value="BROAD">BROAD — Broad / Open</option>
-          <option value="INT">INT — Interest-based</option>
-          <option value="LLA">LLA — Lookalike Audience</option>
-          <option value="RETGT">RETGT — Retargeting</option>
         </select>
       </div>
 
       <div class="field">
         <label>Age Range <span class="indicator ind-empty" id="ind-age"></span></label>
-        <input type="text" id="f-age" placeholder="e.g. 3565, 3545, 2535" oninput="updateText('ind-age')">
-        <span class="field-hint">Numbers only — e.g. 3565 = age 35–65, 2535 = age 25–35</span>
+        <input type="text" id="f-age" placeholder="e.g. 35-65 or ALL" oninput="updateText('ind-age')">
+        <span class="field-hint">Numbers only — dashes allowed for range</span>
       </div>
 
       <div class="field">
@@ -259,16 +257,14 @@ input::placeholder { color: var(--text3); }
         </select>
       </div>
 
-      <!-- spacer -->
       <div></div>
 
     </div>
   </div>
 
-  <!-- PREVIEW: 2 sections -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+  <!-- PREVIEW: Part 1 | Full Name -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:8px;">
 
-    <!-- Part 1: Creative ID -->
     <div class="preview-wrap" style="margin-bottom:0">
       <div class="preview-label" style="color:var(--purple)">Part 1 — Creative ID</div>
       <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Content team: name file &amp; upload to Drive</div>
@@ -282,17 +278,16 @@ input::placeholder { color: var(--text3); }
       </div>
     </div>
 
-    <!-- Part 2: Publishing Settings -->
     <div class="preview-wrap" style="margin-bottom:0">
-      <div class="preview-label">Part 2 — Publishing Settings</div>
-      <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Publishing team: use this independently in Meta Ads Manager</div>
-      <div class="full-name-box incomplete" id="p2Name" style="min-height:52px;font-size:13px">Fill Part 2 fields above.</div>
+      <div class="preview-label">Part 1 + 2 — Full Ad Name</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Publishing team: paste into Meta Ads Manager</div>
+      <div class="full-name-box incomplete" id="fullName" style="min-height:52px;font-size:13px">Fill both parts above.</div>
       <div class="copy-row" style="margin-top:10px">
-        <button class="btn-copy" id="copyBtn" onclick="copyPart('p2Name','copyFeedback')" disabled>
+        <button class="btn-copy" id="copyBtn" onclick="copyPart('fullName','copyFeedback')" disabled>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copy Part 2
+          Copy Full Name
         </button>
-        <button class="btn-reset" onclick="resetAll()">Reset</button>
+        <button class="btn-reset" onclick="resetAd()">Reset</button>
         <span class="copy-feedback" id="copyFeedback">✓ Copied!</span>
       </div>
     </div>
@@ -301,25 +296,27 @@ input::placeholder { color: var(--text3); }
 
   <div class="divider"></div>
 
-  <!-- SECTION HEADER: Campaign & Ad Set -->
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-    <div style="height:1px;flex:1;background:var(--border)"></div>
-    <span style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;">Campaign &amp; Ad Set Level — Publishing Team</span>
-    <div style="height:1px;flex:1;background:var(--border)"></div>
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!--  SECTION 2 — CAMPAIGN LEVEL                                    -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-badge badge-camp">Campaign</span>
+    <span class="section-title">Generate Campaign Name</span>
+    <span class="section-sub">Ads Publishing Team</span>
   </div>
 
-  <!-- CAMPAIGN LEVEL -->
-  <div class="part" style="margin-bottom:16px;">
+  <div class="part">
     <div class="part-header">
-      <span class="part-tag tag-publish">Campaign</span>
-      <span class="part-title">Campaign Level Name</span>
-      <span class="part-who">brand-product-objective-funnel-date</span>
+      <span class="part-tag tag-camp">Campaign</span>
+      <span class="part-title">Campaign-Level Naming</span>
+      <span class="part-who">→ Ads Publishing Team</span>
     </div>
+    <div class="format-hint">Brand-Product-Objective-Funnel-<b>Format</b>-Date</div>
     <div class="fields">
 
       <div class="field">
         <label>Brand <span class="indicator ind-empty" id="ind-cb"></span></label>
-        <select id="fc-brand" class="empty" onchange="updateCampaign(this,'ind-cb')">
+        <select id="fc-brand" class="empty" onchange="update(this,'ind-cb')">
           <option value="">— Select —</option>
           <option value="WSP">WSP</option>
           <option value="RUV">RUV</option>
@@ -328,99 +325,114 @@ input::placeholder { color: var(--text3); }
 
       <div class="field">
         <label>Product <span class="indicator ind-empty" id="ind-cp"></span></label>
-        <select id="fc-prod" class="empty" onchange="updateCampaign(this,'ind-cp')">
+        <select id="fc-prod" class="empty" onchange="update(this,'ind-cp')">
           <option value="">— Select —</option>
         </select>
       </div>
 
       <div class="field">
         <label>Objective <span class="indicator ind-empty" id="ind-co"></span></label>
-        <select id="fc-obj" class="empty" onchange="updateCampaign(this,'ind-co')">
+        <select id="fc-obj" class="empty" onchange="update(this,'ind-co')">
           <option value="">— Select —</option>
         </select>
       </div>
 
       <div class="field">
         <label>Funnel <span class="indicator ind-empty" id="ind-cf"></span></label>
-        <select id="fc-funn" class="empty" onchange="updateCampaign(this,'ind-cf')">
+        <select id="fc-funn" class="empty" onchange="update(this,'ind-cf')">
           <option value="">— Select —</option>
         </select>
       </div>
 
       <div class="field">
-        <label>Launch Date <span class="indicator ind-empty" id="ind-cd2"></span></label>
-        <input type="date" id="fc-date" onchange="updateCampaignDate()">
+        <label>Format <span class="indicator ind-empty" id="ind-cfmt"></span></label>
+        <select id="fc-format" class="empty" onchange="update(this,'ind-cfmt')">
+          <option value="">— Select —</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Date <span class="indicator ind-empty" id="ind-cd"></span></label>
+        <input type="date" id="fc-date" onchange="updateText('ind-cd')">
         <span class="field-hint">Formatted as ddmmyy</span>
       </div>
 
     </div>
+  </div>
 
-    <!-- Campaign preview -->
-    <div style="margin-top:16px;">
-      <div class="full-name-box incomplete" id="campaignName" style="min-height:46px;font-size:13px">Fill campaign fields above.</div>
-      <div class="copy-row" style="margin-top:10px">
-        <button class="btn-copy" id="copyCampBtn" onclick="copyPart('campaignName','copyCampFeedback')" disabled style="background:var(--blue)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copy Campaign Name
-        </button>
-        <button class="btn-reset" onclick="resetCampaign()">Reset</button>
-        <span class="copy-feedback" id="copyCampFeedback">✓ Copied!</span>
-      </div>
+  <div class="preview-wrap camp">
+    <div class="preview-label">Campaign Name</div>
+    <div class="full-name-box incomplete" id="campName">Fill campaign fields above.</div>
+    <div class="copy-row">
+      <button class="btn-copy camp-btn" id="copyCampBtn" onclick="copyPart('campName','copyCampFeedback')" disabled>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy Campaign Name
+      </button>
+      <button class="btn-reset" onclick="resetCamp()">Reset</button>
+      <span class="copy-feedback" id="copyCampFeedback">✓ Copied!</span>
     </div>
   </div>
 
-  <!-- AD SET LEVEL -->
-  <div class="part" style="margin-bottom:16px;">
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!--  SECTION 3 — AD SET LEVEL                                      -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-badge badge-adset">Ad Set</span>
+    <span class="section-title">Generate Ad Set Name</span>
+    <span class="section-sub">Ads Publishing Team</span>
+  </div>
+
+  <div class="part">
     <div class="part-header">
-      <span class="part-tag tag-publish">Ad Set</span>
-      <span class="part-title">Ad Set Level Name</span>
-      <span class="part-who">product-audience-age-destination</span>
+      <span class="part-tag tag-adset">Ad Set</span>
+      <span class="part-title">Ad Set-Level Naming</span>
+      <span class="part-who">→ Ads Publishing Team</span>
     </div>
-    <div class="fields">
+    <div class="format-hint">Product-Audience-Age-<b>Destination</b></div>
+    <div class="fields-4 fields">
 
       <div class="field">
         <label>Product <span class="indicator ind-empty" id="ind-asp"></span></label>
-        <select id="fas-prod" class="empty" onchange="updateAdSet(this,'ind-asp')">
+        <select id="fas-prod" class="empty" onchange="update(this,'ind-asp')">
           <option value="">— Select —</option>
         </select>
       </div>
 
       <div class="field">
         <label>Audience <span class="indicator ind-empty" id="ind-asa"></span></label>
-        <select id="fas-aud" class="empty" onchange="updateAdSet(this,'ind-asa')">
+        <select id="fas-aud" class="empty" onchange="update(this,'ind-asa')">
           <option value="">— Select —</option>
         </select>
       </div>
 
       <div class="field">
-        <label>Age Range <span class="indicator ind-empty" id="ind-asag"></span></label>
-        <input type="text" id="fas-age" placeholder="e.g. 3555, 3545" oninput="updateAdSetAge()">
-        <span class="field-hint">Numbers only — e.g. 3555 = age 35–55</span>
+        <label>Age Range <span class="indicator ind-empty" id="ind-asage"></span></label>
+        <input type="text" id="fas-age" placeholder="e.g. 35-65 or ALL" oninput="updateText('ind-asage')">
+        <span class="field-hint">Numbers only — dashes allowed for range</span>
       </div>
 
       <div class="field">
-        <label>Destination <span class="indicator ind-empty" id="ind-asd"></span></label>
-        <select id="fas-dest" class="empty" onchange="updateAdSet(this,'ind-asd')">
+        <label>Destination <span class="indicator ind-empty" id="ind-asdest"></span></label>
+        <select id="fas-dest" class="empty" onchange="update(this,'ind-asdest')">
           <option value="">— Select —</option>
         </select>
       </div>
-
-      <!-- spacer -->
-      <div></div>
 
     </div>
+  </div>
 
-    <!-- Ad Set preview -->
-    <div style="margin-top:16px;">
-      <div class="full-name-box incomplete" id="adsetName" style="min-height:46px;font-size:13px">Fill ad set fields above.</div>
-      <div class="copy-row" style="margin-top:10px">
-        <button class="btn-copy" id="copyAdSetBtn" onclick="copyPart('adsetName','copyAdSetFeedback')" disabled style="background:var(--blue)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copy Ad Set Name
-        </button>
-        <button class="btn-reset" onclick="resetAdSet()">Reset</button>
-        <span class="copy-feedback" id="copyAdSetFeedback">✓ Copied!</span>
-      </div>
+  <div class="preview-wrap adset">
+    <div class="preview-label">Ad Set Name</div>
+    <div class="full-name-box incomplete" id="adSetName">Fill ad set fields above.</div>
+    <div class="copy-row">
+      <button class="btn-copy adset-btn" id="copyAdSetBtn" onclick="copyPart('adSetName','copyAdSetFeedback')" disabled>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy Ad Set Name
+      </button>
+      <button class="btn-reset" onclick="resetAdSet()">Reset</button>
+      <span class="copy-feedback" id="copyAdSetFeedback">✓ Copied!</span>
     </div>
   </div>
 
@@ -438,8 +450,8 @@ input::placeholder { color: var(--text3); }
         <div class="legend-item"><span class="legend-code">Testi</span>Testimonial</div>
         <div class="legend-item"><span class="legend-code">Pain</span>Pain Point</div>
         <div class="legend-item"><span class="legend-code">Fear</span>Fear / Risk</div>
-        <div class="legend-item"><span class="legend-code">Relief</span>Benefit / Feeling</div>
-        <div class="legend-item"><span class="legend-code">Results</span>Efficacy / Proof</div>
+        <div class="legend-item"><span class="legend-code">Relief</span>Benefit</div>
+        <div class="legend-item"><span class="legend-code">Results</span>Efficacy</div>
         <div class="legend-item"><span class="legend-code">Ingredient</span>Ingredients</div>
         <div class="legend-item"><span class="legend-code">Edu</span>Education</div>
         <div class="legend-item"><span class="legend-code">Compare</span>Comparison</div>
@@ -471,10 +483,11 @@ input::placeholder { color: var(--text3); }
         <div class="legend-item"><span class="legend-code">INT</span>Interest</div>
         <div class="legend-item"><span class="legend-code">LLA</span>Lookalike</div>
         <div class="legend-item"><span class="legend-code">RETGT</span>Retargeting</div>
-        <div style="margin-top:10px" class="legend-group-title">Format</div>
-        <div class="legend-item"><span class="legend-code">__</span>Separator (Part 1 ↔ 2)</div>
-        <div class="legend-item"><span class="legend-code">-</span>Field separator</div>
-        <div class="legend-item"><span class="legend-code">MMYY</span>e.g. 0613 = Jun 2026</div>
+        <div style="margin-top:10px" class="legend-group-title">Destination</div>
+        <div class="legend-item"><span class="legend-code">WA</span>WhatsApp</div>
+        <div class="legend-item"><span class="legend-code">MSGIG</span>Messenger/IG</div>
+        <div class="legend-item"><span class="legend-code">CART</span>Website Cart</div>
+        <div class="legend-item"><span class="legend-code">LP</span>Landing Page</div>
       </div>
     </div>
   </div>
@@ -487,27 +500,27 @@ const SHEET_ID = '1ym4CSJU3Z24mN_4QOXTnqOFK6hcRK78iOAfeAStnBvk';
 
 // Field map: select element ID → column pair in Labels sheet
 const FIELD_MAP = [
-  // Ad level (Part 1)
-  { id: 'f-angle',   codeCol: 'Angle_Code',     labelCol: 'Angle_Label'     },
-  { id: 'f-prod',    codeCol: 'Product_Code',    labelCol: 'Product_Label'   },
-  { id: 'f-format',  codeCol: 'Format_Code',     labelCol: 'Format_Label'    },
-  // Ad level (Part 2)
-  { id: 'f-obj',     codeCol: 'Objective_Code',  labelCol: 'Objective_Label' },
-  { id: 'f-funn',    codeCol: 'Funnel_Code',     labelCol: 'Funnel_Label'    },
-  { id: 'f-aud',     codeCol: 'Audience_Code',   labelCol: 'Audience_Label'  },
+  // Ad level — Part 1
+  { id: 'f-angle',   codeCol: 'Angle_Code',       labelCol: 'Angle_Label'       },
+  { id: 'f-prod',    codeCol: 'Product_Code',      labelCol: 'Product_Label'     },
+  { id: 'f-format',  codeCol: 'Format_Code',       labelCol: 'Format_Label'      },
+  // Ad level — Part 2
+  { id: 'f-obj',     codeCol: 'Objective_Code',    labelCol: 'Objective_Label'   },
+  { id: 'f-funn',    codeCol: 'Funnel_Code',       labelCol: 'Funnel_Label'      },
+  { id: 'f-aud',     codeCol: 'Audience_Code',     labelCol: 'Audience_Label'    },
+  { id: 'f-dest',    codeCol: 'Destination_Code',  labelCol: 'Destination_Label' },
   // Campaign level
-  { id: 'fc-prod',   codeCol: 'Product_Code',    labelCol: 'Product_Label'   },
-  { id: 'fc-obj',    codeCol: 'Objective_Code',  labelCol: 'Objective_Label' },
-  { id: 'fc-funn',   codeCol: 'Funnel_Code',     labelCol: 'Funnel_Label'    },
+  { id: 'fc-prod',   codeCol: 'Product_Code',      labelCol: 'Product_Label'     },
+  { id: 'fc-obj',    codeCol: 'Objective_Code',    labelCol: 'Objective_Label'   },
+  { id: 'fc-funn',   codeCol: 'Funnel_Code',       labelCol: 'Funnel_Label'      },
+  { id: 'fc-format', codeCol: 'Format_Code',       labelCol: 'Format_Label'      },
   // Ad Set level
-  { id: 'fas-prod',  codeCol: 'Product_Code',      labelCol: 'Product_Label'      },
-  { id: 'fas-aud',   codeCol: 'Audience_Code',     labelCol: 'Audience_Label'     },
-  // Destination (Part 2 + Ad Set)
-  { id: 'f-dest',    codeCol: 'Destination_Code',  labelCol: 'Destination_Label'  },
-  { id: 'fas-dest',  codeCol: 'Destination_Code',  labelCol: 'Destination_Label'  },
+  { id: 'fas-prod',  codeCol: 'Product_Code',      labelCol: 'Product_Label'     },
+  { id: 'fas-aud',   codeCol: 'Audience_Code',     labelCol: 'Audience_Label'    },
+  { id: 'fas-dest',  codeCol: 'Destination_Code',  labelCol: 'Destination_Label' },
 ];
 
-// ── JSONP FETCH (works from file:// and https://) ─────────────────
+// ── JSONP FETCH ───────────────────────────────────────────────────
 function gvizFetch(sheet) {
   return new Promise((resolve, reject) => {
     const cb = '_gv' + Date.now() + Math.random().toString(36).slice(2);
@@ -531,7 +544,7 @@ function gvizParse(table) {
   });
 }
 
-// ── LOAD LABELS FROM SHEET ────────────────────────────────────────
+// ── LOAD LABELS ───────────────────────────────────────────────────
 async function loadLabels() {
   const statusEl = document.getElementById('loadStatus');
   statusEl.textContent = 'Loading labels from Sheet...';
@@ -540,8 +553,8 @@ async function loadLabels() {
     const rows = await gvizFetch('Labels');
     FIELD_MAP.forEach(f => {
       const sel = document.getElementById(f.id);
+      if (!sel) return;
       const currentVal = sel.value;
-      // Keep first placeholder option
       while (sel.options.length > 1) sel.remove(1);
       rows.forEach(r => {
         const code = r[f.codeCol], label = r[f.labelCol];
@@ -551,12 +564,10 @@ async function loadLabels() {
         opt.textContent = label ? `${code} — ${label}` : code;
         sel.appendChild(opt);
       });
-      // Restore previous value if still valid
       if (currentVal) sel.value = currentVal;
     });
-    // Also update legend from sheet
     buildLegend(rows);
-    statusEl.textContent = '✓ Labels loaded from Google Sheet · Refresh page to get latest';
+    statusEl.textContent = '✓ Labels loaded from Google Sheet · Refresh to get latest';
     statusEl.style.color = 'var(--green)';
   } catch(e) {
     statusEl.textContent = '⚠ Using default labels · Make sure Sheet is shared as "Anyone can view"';
@@ -569,10 +580,10 @@ function buildLegend(rows) {
   const legendEl = document.getElementById('legendGrid');
   if (!legendEl) return;
   const groups = [
-    { title: 'Angle',     codeCol: 'Angle_Code',     labelCol: 'Angle_Label'    },
-    { title: 'Product',   codeCol: 'Product_Code',    labelCol: 'Product_Label'  },
-    { title: 'Funnel',    codeCol: 'Funnel_Code',     labelCol: 'Funnel_Label'   },
-    { title: 'Audience',  codeCol: 'Audience_Code',   labelCol: 'Audience_Label' },
+    { title: 'Angle',       codeCol: 'Angle_Code',       labelCol: 'Angle_Label'       },
+    { title: 'Product',     codeCol: 'Product_Code',      labelCol: 'Product_Label'     },
+    { title: 'Funnel / Objective', codeCol: 'Funnel_Code', labelCol: 'Funnel_Label'    },
+    { title: 'Audience',    codeCol: 'Audience_Code',     labelCol: 'Audience_Label'    },
   ];
   legendEl.innerHTML = groups.map(g => {
     const items = rows.filter(r => r[g.codeCol]).map(r =>
@@ -582,68 +593,84 @@ function buildLegend(rows) {
   }).join('');
 }
 
-function getAgeValue() {
-  return (document.getElementById('f-age')?.value || '').trim().replace(/\s+/g, '');
+// ── HELPERS ───────────────────────────────────────────────────────
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
 }
 
-// ── DATE FORMAT ───────────────────────────────────────────────────
-function getDateValue() {
-  const raw = document.getElementById('f-mmyy').value; // yyyy-mm-dd
+function getDateValue(inputId) {
+  const raw = document.getElementById(inputId)?.value;
   if (!raw) return '';
   const [y, m, d] = raw.split('-');
   return d + m + y.slice(2); // ddmmyy
 }
 
-// ── FIELD LOGIC ───────────────────────────────────────────────────
-function val(id) { return document.getElementById(id).value.trim(); }
+function getAgeValue(inputId) {
+  return (document.getElementById(inputId)?.value || '').trim().replace(/\s+/g, '');
+}
 
+// ── FIELD CHANGE HANDLERS ─────────────────────────────────────────
 function update(sel, indId) {
   sel.classList.toggle('empty', !sel.value);
   document.getElementById(indId).className = 'indicator ' + (sel.value ? 'ind-ok' : 'ind-empty');
-  generate();
+  generateAll();
 }
 
 function updateText(indId) {
-  const inputId = indId.replace('ind-', 'f-');
-  const v = inputId === 'f-mmyy' ? getDateValue() : val(inputId);
-  document.getElementById(indId).className = 'indicator ' + (v ? 'ind-ok' : 'ind-empty');
+  // Map indicator IDs to input IDs
+  const map = {
+    'ind-hook':  'f-hook',
+    'ind-mmyy':  'f-mmyy',
+    'ind-age':   'f-age',
+    'ind-cd':    'fc-date',
+    'ind-asage': 'fas-age',
+  };
+  const inputId = map[indId] || indId.replace('ind-', 'f-');
+
+  // Sanitise hook — CamelCase only, no dashes/spaces
   if (inputId === 'f-hook') {
     const el = document.getElementById('f-hook');
     el.value = el.value.replace(/[^a-zA-Z0-9]/g, '');
   }
-  if (inputId === 'f-age') {
-    const el = document.getElementById('f-age');
-    el.value = el.value.replace(/[^0-9]/g, '');
+
+  let v;
+  if (inputId === 'f-mmyy' || inputId === 'fc-date') {
+    v = getDateValue(inputId);
+  } else if (inputId === 'f-age' || inputId === 'fas-age') {
+    v = getAgeValue(inputId);
+  } else {
+    v = val(inputId);
   }
-  generate();
+
+  document.getElementById(indId).className = 'indicator ' + (v ? 'ind-ok' : 'ind-empty');
+  generateAll();
 }
 
-// ── GENERATE NAME ─────────────────────────────────────────────────
-function generate() {
+// ── GENERATE — AD LEVEL ───────────────────────────────────────────
+function generateAd() {
   const brand  = val('f-brand');
   const prod   = val('f-prod');
   const angle  = val('f-angle');
   const fmt    = val('f-format');
   const hook   = val('f-hook');
   const vn     = val('f-vn');
-  const date   = getDateValue();
+  const date   = getDateValue('f-mmyy');
   const obj    = val('f-obj');
   const funn   = val('f-funn');
   const aud    = val('f-aud');
-  const age    = getAgeValue();
+  const age    = getAgeValue('f-age');
+  const dest   = val('f-dest');
 
-  // Part 1 — Creative ID
   const p1Fields = [brand, prod, angle, fmt, hook, vn, date];
   const p1Complete = p1Fields.every(Boolean);
   const p1 = p1Fields.filter(Boolean).join('-');
 
-  // Part 2 — Publishing
-  const dest   = val('f-dest');
   const p2Fields = [obj, funn, aud, age, dest];
   const p2Complete = p2Fields.every(Boolean);
   const p2 = p2Fields.filter(Boolean).join('-');
 
-  // ── Update Part 1 preview ──
+  // Part 1 preview
   const p1El = document.getElementById('p1Name');
   const p1Btn = document.getElementById('copyP1Btn');
   if (p1Complete) {
@@ -658,20 +685,86 @@ function generate() {
     p1Btn.disabled = true;
   }
 
-  // ── Update Part 2 preview (independent) ──
-  const p2El = document.getElementById('p2Name');
+  // Full name preview
+  const fullEl = document.getElementById('fullName');
   const copyBtn = document.getElementById('copyBtn');
-  if (p2Complete) {
-    p2El.textContent = p2;
-    p2El.className = 'full-name-box complete';
-    p2El._value = '__' + p2;   // prepend __ so copied value is ready to append to Part 1
+  if (p1Complete && p2Complete) {
+    const full = p1 + '__' + p2;
+    fullEl.textContent = full;
+    fullEl.className = 'full-name-box complete';
+    fullEl._value = full;
     copyBtn.disabled = false;
+  } else if (p1Complete) {
+    fullEl.textContent = p1 + ' __ [Fill Part 2]';
+    fullEl.className = 'full-name-box';
+    fullEl._value = null;
+    copyBtn.disabled = true;
   } else {
-    p2El.textContent = p2 || 'Fill Part 2 fields above.';
-    p2El.className = 'full-name-box ' + (p2 ? '' : 'incomplete');
-    p2El._value = null;
+    fullEl.textContent = 'Fill both parts above.';
+    fullEl.className = 'full-name-box incomplete';
+    fullEl._value = null;
     copyBtn.disabled = true;
   }
+}
+
+// ── GENERATE — CAMPAIGN LEVEL ─────────────────────────────────────
+function generateCamp() {
+  const brand = val('fc-brand');
+  const prod  = val('fc-prod');
+  const obj   = val('fc-obj');
+  const funn  = val('fc-funn');
+  const fmt   = val('fc-format');
+  const date  = getDateValue('fc-date');
+
+  const fields = [brand, prod, obj, funn, fmt, date];
+  const complete = fields.every(Boolean);
+  const name = fields.filter(Boolean).join('-');
+
+  const el = document.getElementById('campName');
+  const btn = document.getElementById('copyCampBtn');
+  if (complete) {
+    el.textContent = name;
+    el.className = 'full-name-box complete';
+    el._value = name;
+    btn.disabled = false;
+  } else {
+    el.textContent = name || 'Fill campaign fields above.';
+    el.className = 'full-name-box ' + (name ? '' : 'incomplete');
+    el._value = null;
+    btn.disabled = true;
+  }
+}
+
+// ── GENERATE — AD SET LEVEL ───────────────────────────────────────
+function generateAdSet() {
+  const prod = val('fas-prod');
+  const aud  = val('fas-aud');
+  const age  = getAgeValue('fas-age');
+  const dest = val('fas-dest');
+
+  const fields = [prod, aud, age, dest];
+  const complete = fields.every(Boolean);
+  const name = fields.filter(Boolean).join('-');
+
+  const el = document.getElementById('adSetName');
+  const btn = document.getElementById('copyAdSetBtn');
+  if (complete) {
+    el.textContent = name;
+    el.className = 'full-name-box complete';
+    el._value = name;
+    btn.disabled = false;
+  } else {
+    el.textContent = name || 'Fill ad set fields above.';
+    el.className = 'full-name-box ' + (name ? '' : 'incomplete');
+    el._value = null;
+    btn.disabled = true;
+  }
+}
+
+function generateAll() {
+  generateAd();
+  generateCamp();
+  generateAdSet();
 }
 
 // ── COPY ──────────────────────────────────────────────────────────
@@ -690,135 +783,56 @@ function copyPart(elId, feedbackId) {
   });
 }
 
-// ── CAMPAIGN LEVEL ─────────────────────────────────────────────────
-function updateCampaign(sel, indId) {
-  sel.classList.toggle('empty', !sel.value);
-  document.getElementById(indId).className = 'indicator ' + (sel.value ? 'ind-ok' : 'ind-empty');
-  generateCampaign();
-}
-
-function updateCampaignDate() {
-  const v = getCampaignDate();
-  document.getElementById('ind-cd2').className = 'indicator ' + (v ? 'ind-ok' : 'ind-empty');
-  generateCampaign();
-}
-
-function getCampaignDate() {
-  const raw = document.getElementById('fc-date').value;
-  if (!raw) return '';
-  const [y, m, d] = raw.split('-');
-  return d + m + y.slice(2);
-}
-
-function generateCampaign() {
-  const brand = document.getElementById('fc-brand').value;
-  const prod  = document.getElementById('fc-prod').value;
-  const obj   = document.getElementById('fc-obj').value;
-  const funn  = document.getElementById('fc-funn').value;
-  const date  = getCampaignDate();
-
-  const fields = [brand, prod, obj, funn, date];
-  const complete = fields.every(Boolean);
-  const name = fields.filter(Boolean).join('-');
-
-  const el = document.getElementById('campaignName');
-  const btn = document.getElementById('copyCampBtn');
-  if (complete) {
-    el.textContent = name;
-    el.className = 'full-name-box complete';
-    el._value = name;
-    btn.disabled = false;
-  } else {
-    el.textContent = name || 'Fill campaign fields above.';
-    el.className = 'full-name-box ' + (name ? '' : 'incomplete');
-    el._value = null;
-    btn.disabled = true;
-  }
-}
-
-function resetCampaign() {
-  ['fc-brand','fc-prod','fc-obj','fc-funn'].forEach(id => {
-    const s = document.getElementById(id); s.value = ''; s.classList.add('empty');
+// ── RESET ─────────────────────────────────────────────────────────
+function resetSection(selectors, previewIds, btnIds, defaultTexts) {
+  document.querySelectorAll(selectors).forEach(s => { s.value = ''; s.classList.add('empty'); });
+  previewIds.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = defaultTexts[i]; el.className = 'full-name-box incomplete'; el._value = null; }
   });
-  document.getElementById('fc-date').value = '';
-  ['ind-cb','ind-cp','ind-co','ind-cf','ind-cd2'].forEach(id =>
-    document.getElementById(id).className = 'indicator ind-empty'
-  );
-  const el = document.getElementById('campaignName');
-  el.textContent = 'Fill campaign fields above.';
-  el.className = 'full-name-box incomplete';
-  el._value = null;
+  btnIds.forEach(id => { const btn = document.getElementById(id); if (btn) btn.disabled = true; });
+  document.querySelectorAll('.indicator').forEach(i => i.className = 'indicator ind-empty');
+}
+
+function resetAd() {
+  ['f-brand','f-prod','f-angle','f-format','f-vn','f-obj','f-funn','f-aud','f-dest'].forEach(id => {
+    const el = document.getElementById(id); if (el) { el.value = ''; el.classList.add('empty'); }
+  });
+  ['f-hook','f-age','f-mmyy'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  [['p1Name','Fill Part 1 fields above.'],['fullName','Fill both parts above.']].forEach(([id, txt]) => {
+    const el = document.getElementById(id); el.textContent = txt; el.className = 'full-name-box incomplete'; el._value = null;
+  });
+  document.getElementById('copyP1Btn').disabled = true;
+  document.getElementById('copyBtn').disabled = true;
+  document.querySelectorAll('#p1Name, #fullName').forEach(() => {});
+  // Reset indicators for ad section
+  ['ind-brand','ind-prod','ind-angle','ind-format','ind-hook','ind-vn','ind-mmyy','ind-obj','ind-funn','ind-aud','ind-age','ind-dest'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.className = 'indicator ind-empty';
+  });
+}
+
+function resetCamp() {
+  ['fc-brand','fc-prod','fc-obj','fc-funn','fc-format'].forEach(id => {
+    const el = document.getElementById(id); if (el) { el.value = ''; el.classList.add('empty'); }
+  });
+  const dateEl = document.getElementById('fc-date'); if (dateEl) dateEl.value = '';
+  const el = document.getElementById('campName'); el.textContent = 'Fill campaign fields above.'; el.className = 'full-name-box incomplete'; el._value = null;
   document.getElementById('copyCampBtn').disabled = true;
-}
-
-// ── AD SET LEVEL ───────────────────────────────────────────────────
-function updateAdSet(sel, indId) {
-  sel.classList.toggle('empty', !sel.value);
-  document.getElementById(indId).className = 'indicator ' + (sel.value ? 'ind-ok' : 'ind-empty');
-  generateAdSet();
-}
-
-function updateAdSetAge() {
-  const el = document.getElementById('fas-age');
-  el.value = el.value.replace(/[^0-9]/g, '');
-  const v = el.value.trim();
-  document.getElementById('ind-asag').className = 'indicator ' + (v ? 'ind-ok' : 'ind-empty');
-  generateAdSet();
-}
-
-function generateAdSet() {
-  const prod = document.getElementById('fas-prod').value;
-  const aud  = document.getElementById('fas-aud').value;
-  const age  = document.getElementById('fas-age').value.trim();
-  const dest = document.getElementById('fas-dest').value;
-
-  const fields = [prod, aud, age, dest];
-  const complete = fields.every(Boolean);
-  const name = fields.filter(Boolean).join('-');
-
-  const el = document.getElementById('adsetName');
-  const btn = document.getElementById('copyAdSetBtn');
-  if (complete) {
-    el.textContent = name;
-    el.className = 'full-name-box complete';
-    el._value = name;
-    btn.disabled = false;
-  } else {
-    el.textContent = name || 'Fill ad set fields above.';
-    el.className = 'full-name-box ' + (name ? '' : 'incomplete');
-    el._value = null;
-    btn.disabled = true;
-  }
+  ['ind-cb','ind-cp','ind-co','ind-cf','ind-cfmt','ind-cd'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.className = 'indicator ind-empty';
+  });
 }
 
 function resetAdSet() {
   ['fas-prod','fas-aud','fas-dest'].forEach(id => {
-    const s = document.getElementById(id); s.value = ''; s.classList.add('empty');
+    const el = document.getElementById(id); if (el) { el.value = ''; el.classList.add('empty'); }
   });
-  document.getElementById('fas-age').value = '';
-  ['ind-asp','ind-asa','ind-asag','ind-asd'].forEach(id =>
-    document.getElementById(id).className = 'indicator ind-empty'
-  );
-  const el = document.getElementById('adsetName');
-  el.textContent = 'Fill ad set fields above.';
-  el.className = 'full-name-box incomplete';
-  el._value = null;
+  const ageEl = document.getElementById('fas-age'); if (ageEl) ageEl.value = '';
+  const el = document.getElementById('adSetName'); el.textContent = 'Fill ad set fields above.'; el.className = 'full-name-box incomplete'; el._value = null;
   document.getElementById('copyAdSetBtn').disabled = true;
-}
-
-// ── RESET ─────────────────────────────────────────────────────────
-function resetAll() {
-  document.querySelectorAll('select').forEach(s => { s.value = ''; s.classList.add('empty'); });
-  document.querySelectorAll('input').forEach(i => i.value = '');
-  document.querySelectorAll('.indicator').forEach(i => i.className = 'indicator ind-empty');
-  ['p1Name','p2Name'].forEach(id => {
-    const el = document.getElementById(id);
-    el.textContent = id === 'p1Name' ? 'Fill Part 1 fields above.' : 'Fill Part 2 fields above.';
-    el.className = 'full-name-box incomplete';
-    el._value = null;
+  ['ind-asp','ind-asa','ind-asage','ind-asdest'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.className = 'indicator ind-empty';
   });
-  document.getElementById('copyP1Btn').disabled = true;
-  document.getElementById('copyBtn').disabled = true;
 }
 
 // ── INIT ──────────────────────────────────────────────────────────
